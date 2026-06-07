@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>kgtkr/cd-common:renovate-common"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "ghcr.io/kgtkr/kgtkr.net"
+      ],
+      "automerge": true
+    }
   ]
 }
