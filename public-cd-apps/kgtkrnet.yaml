@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kgtkrnet
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: public-cd-apps
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    path: kgtkr/kgtkrnet
+    repoURL: https://github.com/kgtkr/public-cd
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
