@@ -8,58 +8,15 @@ metadata:
 spec:
   project: public-cd-apps
   source:
-    chart: minecraft-bedrock
-    repoURL: https://itzg.github.io/minecraft-server-charts/
-    targetRevision: 2.8.0
-    helm:
-      releaseName: minecraft-bedrock-server
-      values: |
-        image:
-          tag: 2023.8.1
-        minecraftServer:
-          serverName: "てけら統合版さーばー！！"
-          eula: "true"
-          version: "1.20.13.01"
-          difficulty: "normal"
-          whitelist: true
-          whitelistUsers: "kgtkr,dakuba0203,chiisan0201,yunyuxu,masukanya77,syoking9754,NoahMizuki0916,karoukittysama,thunder1324654,AwfulRat2937254"
-          ops: "2535422252797141"
-          serviceType: "LoadBalancer"
-        extraEnvs:
-          - name: "ALLOW_LIST"
-            value: "true"
-        persistence:
-          storageClass: "-"
-          dataDir:
-            enabled: true
-            existingClaim: minecraft-bedrock-server-data
-        serviceAnnotations:
-          metallb.universe.tf/allow-shared-ip: "true"
-          metallb.universe.tf/address-pool: public-ips
-          external-dns.alpha.kubernetes.io/hostname: minecraft-bedrock.kgtkr.net
+    path: kgtkr/minecraft-bedrock-server
+    repoURL: https://github.com/kgtkr/public-cd
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: minecraft-bedrock-server
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: minecraft-bedrock-server
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: minecraft-bedrock-server-data
-  namespace: minecraft-bedrock-server
-  labels:
-    recurring-job.longhorn.io/source: enabled
-    recurring-job.longhorn.io/backup: enabled
-    recurring-job.longhorn.io/snapshot: enabled
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 5Gi
-  volumeName: minecraft-bedrock-server
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

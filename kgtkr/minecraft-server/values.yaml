@@ -1,0 +1,18 @@
+minecraft:
+  minecraftServer:
+    motd: "てけらさーばー！！"
+    eula: "TRUE"
+    version: "1.19.3"
+    difficulty: "normal"
+    whitelist: "kgtkr,yustier,swawa_yu,f0reach"
+    ops: "kgtkr"
+    serviceType: "LoadBalancer"
+  persistence:
+    storageClass: "-"
+    dataDir:
+      enabled: true
+      existingClaim: minecraft-server-data
+  serviceAnnotations:
+    metallb.universe.tf/allow-shared-ip: "true"
+    metallb.universe.tf/address-pool: public-ips
+    external-dns.alpha.kubernetes.io/hostname: minecraft.kgtkr.net

@@ -1,5 +1,4 @@
 namespace: kgtkrnet
 resources:
-  - ns.yaml
   - kgtkrnet.yaml
   - ingress.yaml

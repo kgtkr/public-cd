@@ -9,6 +9,7 @@ spec:
   project: public-cd-apps
   destination:
     server: https://kubernetes.default.svc
+    namespace: kgtkrnet
   source:
     path: kgtkr/kgtkrnet
     repoURL: https://github.com/kgtkr/public-cd
@@ -17,3 +18,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

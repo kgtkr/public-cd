@@ -1,0 +1,24 @@
+minecraft-bedrock:
+  image:
+    tag: 2023.8.1
+  minecraftServer:
+    serverName: "てけら統合版さーばー！！"
+    eula: "true"
+    version: "1.20.13.01"
+    difficulty: "normal"
+    whitelist: true
+    whitelistUsers: "kgtkr,dakuba0203,chiisan0201,yunyuxu,masukanya77,syoking9754,NoahMizuki0916,karoukittysama,thunder1324654,AwfulRat2937254"
+    ops: "2535422252797141"
+    serviceType: "LoadBalancer"
+  extraEnvs:
+    - name: "ALLOW_LIST"
+      value: "true"
+  persistence:
+    storageClass: "-"
+    dataDir:
+      enabled: true
+      existingClaim: minecraft-bedrock-server-data
+  serviceAnnotations:
+    metallb.universe.tf/allow-shared-ip: "true"
+    metallb.universe.tf/address-pool: public-ips
+    external-dns.alpha.kubernetes.io/hostname: minecraft-bedrock.kgtkr.net
