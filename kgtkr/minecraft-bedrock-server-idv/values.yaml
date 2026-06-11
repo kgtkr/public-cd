@@ -3,7 +3,7 @@ minecraft-bedrock:
     tag: 2024.11.0
   minecraftServer:
     serverName: "てけらの第五鯖まいくらわーるど"
-    eula: "false" # remove deployment
+    eula: "FALSE" # remove deployment
     version: "1.21.60.10"
     difficulty: "normal"
     whitelist: true
