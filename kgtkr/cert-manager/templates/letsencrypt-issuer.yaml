@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-issuer
+spec:
+  acme:
+    email: account@kgtkr.net
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-issuer-account-key
+    solvers:
+      - dns01:
+          cloudflare:
+            email: kgtkr.jp@gmail.com
+            apiTokenSecretRef:
+              name: acme-dns01-cloudflare-api-key
+              key: apikey
