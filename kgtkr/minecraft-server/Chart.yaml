@@ -3,5 +3,5 @@ name: minecraft-server
 version: 1.0.0
 dependencies:
   - name: minecraft
-    version: 3.8.1
+    version: 3.10.0
     repository: https://itzg.github.io/minecraft-server-charts/
