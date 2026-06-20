@@ -1,0 +1,4 @@
+namespace: discord-category-join-manager
+resources:
+  - discord-category-join-manager.yaml
+  - config.yaml

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: discord-category-join-manager
+  name: discord-category-join-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: discord-category-join-manager
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: discord-category-join-manager
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/discord-category-join-manager:20220221131411694-f21f773
+          name: discord-category-join-manager
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "15Mi"
+          volumeMounts:
+            - mountPath: /var/discord-category-join-manager/config
+              name: discord-category-join-manager-config
+              readOnly: true
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - ln
+                  - -s
+                  - /var/discord-category-join-manager/config/config.json
+                  - /home/app/config.json
+      restartPolicy: Always
+      volumes:
+        - name: discord-category-join-manager-config
+          secret:
+            secretName: discord-category-join-manager-config

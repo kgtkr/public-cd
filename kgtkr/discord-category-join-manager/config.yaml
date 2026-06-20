@@ -1,0 +1,17 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: discord-category-join-manager-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    token: AgADTrT0z3Zz2e6XCljeUd418N0NS+O2HGg4GREfyMR6GSn+iyylj7uYjadvE+trQu//JwiyROBNAvHAQOntB/4ZxUvE05pQS4pmlZCAzjm2v4NRrE/KHO6CIIchxPt+gz00oPp+ETk43Pc25cSX7gHsmI1xxW4skU9CX3mD9QWCIhMCV3IfptxqRQg1b9zMQjoI0MirWMZ6nIP1C05rSHNKlgnmB+Udx9s2xfd5Xy5OvNAR7W156lhgGtYxTP8JLztSP9k530NoSIH4Yk81c0QmX8qudzel8D4zp6JCD6d6uyhCvm7z5Nir6adealtjbJ7Q/unjhepp9Hou42f3rppasUAsQLpQfAztf41/QxtVU3LE3Ird7qv8nCASfEfH1C3iD7HHNDP/PihtACLNYVmsC67avr0BCKfORYglDBTvX4xr7IyP6rcPsK1nT57CNrKE5u6IDh7MScuUoCbgOXRC3qquXeYXLjhZVZl8OGhQDv1kp0OjEgy2RNBeDE0Pb6pjgKwEjo72ujHkmX9LDz9y9pVKCQlakAhVkxRgdt0IeMOkzO+fVUb1K09UEnuQOW6Fwzo+6jTPR6qiXgt5lBISB4oXQnYIFKiV7WOkVhwEvuFRfX1Wg99EH/mikL4gaSZ2+yi87PPe7wINTNVie0eb7QichfLkYSaK0KiiEc60qXfMcnDgbC/qLXoPUZnvXpQrOlteYWDAQP23X+wrHacwMoprTamL1KPvRY1KkzuReeVtO9fHLoBHFjcSWS+rCatEgJQWGA5lnw5LpA==
+  template:
+    data:
+      config.json: |
+        {
+            "token": "{{ index . "token" }}",
+            "appId": "736491265134166027",
+            "guildId": "724244136944992256"
+        }
