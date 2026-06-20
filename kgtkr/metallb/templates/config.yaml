@@ -23,10 +23,10 @@ metadata:
   name: local-ips
 spec:
   addresses:
-    # can
+    # can (control-planeを不安定にしたくないので無効化)
     # - 192.168.190.64/32
-    # saba
-    - 192.168.190.45/32
+    # saba (rpi性能的にきついので無効化)
+    # - 192.168.190.45/32
     # cope
     - 192.168.190.47/32
     # mmsan
