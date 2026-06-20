@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: kgtkr-apps
+spec:
+  description: kgtkr-apps project
+  sourceRepos:
+    - "*"
+  destinations:
+    - namespace: "*"
+      server: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  roles:
+    - name: editor
+      description: Edit privileges to kgtkr-apps applications
+      policies:
+        - p, proj:kgtkr-apps:editor, applications, create, kgtkr-apps/*, allow
+        - p, proj:kgtkr-apps:editor, applications, update, kgtkr-apps/*, allow
+        - p, proj:kgtkr-apps:editor, applications, delete, kgtkr-apps/*, allow
+        - p, proj:kgtkr-apps:editor, applications, sync, kgtkr-apps/*, allow
+        - p, proj:kgtkr-apps:editor, applications, get, kgtkr-apps/*, allow

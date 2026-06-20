@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: public-cd-apps
+spec:
+  description: public-cd-apps project
+  sourceRepos:
+    - "*"
+  destinations:
+    - namespace: "*"
+      server: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  roles:
+    - name: editor
+      description: Edit privileges to public-cd-apps applications
+      policies:
+        - p, proj:public-cd-apps:editor, applications, create, public-cd-apps/*, allow
+        - p, proj:public-cd-apps:editor, applications, update, public-cd-apps/*, allow
+        - p, proj:public-cd-apps:editor, applications, delete, public-cd-apps/*, allow
+        - p, proj:public-cd-apps:editor, applications, sync, public-cd-apps/*, allow
+        - p, proj:public-cd-apps:editor, applications, get, public-cd-apps/*, allow
