@@ -5,3 +5,19 @@ resources:
   - minecraft-bedrock-server-idv.yaml
   - kgtkrnet.yaml
   - discord-category-join-manager.yaml
+  - sudo-discord-wake-up-bot.yaml
+  - mastodon.yaml
+  - anontown.yaml
+  - discord-wake-up-bot.yaml
+  - discord-welcome-bot.yaml
+  - discord-make-channel.yaml
+  - discord-category-join-manager-use-message-command.yaml
+  - discord-pin-bot.yaml
+  - discord-vc-disconnect-bot.yaml
+  - renovate.yaml
+  - tkvs.yaml
+  - nature-remo-temperature-adjuster.yaml
+  - remo-allowlist-alarm.yaml
+  - discord-join-category-bot.yaml
+  - echo-server.yaml
+  - attic.yaml
