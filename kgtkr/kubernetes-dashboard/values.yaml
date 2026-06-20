@@ -1,0 +1,13 @@
+kubernetes-dashboard:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/tls-acme: "true"
+      cert-manager.io/cluster-issuer: letsencrypt-issuer
+    className: nginx-private
+    hosts:
+      - dashboard.k3s.kgtkr.net
+    tls:
+      - hosts:
+          - dashboard.k3s.kgtkr.net
+        secretName: kgtkr-k3s-dashboard-tls

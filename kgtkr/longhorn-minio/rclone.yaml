@@ -1,0 +1,67 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rclone
+spec:
+  schedule: "0 6 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: rclone
+          tolerations:
+            - key: "kubernetes.kgtkr.net/unreliable"
+              effect: "NoSchedule"
+          initContainers:
+            - image: bitnamilegacy/kubectl:1.33
+              name: get-secret
+              command:
+                - /bin/sh
+                - -euc
+                - |
+                  kubectl get secret rclone-init-config -o jsonpath='{.data.config}' | base64 -d > /config/rclone/rclone-init.conf
+                  if [ -z "$(kubectl get secret rclone-current-config -o jsonpath='{.data.config}')" ]; then
+                    kubectl create secret generic rclone-current-config --from-file=config=/config/rclone/rclone-init.conf
+                  fi
+                  kubectl get secret rclone-current-config -o jsonpath='{.data.config}' | base64 -d > /config/rclone/rclone.conf
+              volumeMounts:
+                - mountPath: /config/rclone
+                  name: rclone-config
+            - image: rclone/rclone:1.69
+              name: app
+              resources:
+                requests:
+                  cpu: "10m"
+                  memory: "300Mi"
+              command:
+                - /bin/sh
+                - -euc
+                - |
+                  # volume.cfgが一定以上かをチェックすることで誤ってバックアップが全削除されることを防ぐ
+                  COUNT=$(rclone ls --max-depth 7 --include volume.cfg minio: | wc -l)
+                  test $COUNT -ge 3
+
+                  rclone -v sync minio:/longhorn gdrive:/longhorn --fast-list
+              volumeMounts:
+                - mountPath: /config/rclone
+                  name: rclone-config
+            - image: bitnamilegacy/kubectl:1.33
+              name: patch-secret
+              command:
+                - /bin/sh
+                - -euc
+                - |
+                  kubectl create secret generic rclone-current-config --from-file=config=/config/rclone/rclone.conf -o yaml --dry-run=client | kubectl apply -f -
+              volumeMounts:
+                - mountPath: /config/rclone
+                  name: rclone-config
+          containers:
+            - image: alpine:3.24
+              name: nop
+              command:
+                - echo
+          volumes:
+            - name: rclone-config
+              emptyDir: {}
+          restartPolicy: Never

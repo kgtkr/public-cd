@@ -1,0 +1,27 @@
+datadog:
+  datadog:
+    site: datadoghq.com
+    apiKeyExistingSecret: datadog
+    env:
+      - name: DD_HOSTNAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+    logs:
+      enabled: true
+      containerCollectAll: true
+  agents:
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        effect: NoSchedule
+      - key: kubernetes.kgtkr.net/unreliable
+        effect: NoSchedule
+    containers:
+      agent:
+        livenessProbe:
+          initialDelaySeconds: 60
+        readinessProbe:
+          initialDelaySeconds: 60
+      traceAgent:
+        livenessProbe:
+          initialDelaySeconds: 60

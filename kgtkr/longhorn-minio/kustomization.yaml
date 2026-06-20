@@ -1,0 +1,9 @@
+namespace: longhorn-minio
+resources:
+  - minio.yaml
+  - rclone.yaml
+  - rclone-init-config.yaml
+  - minio-console-ingress.yaml
+  - minio-config.yaml
+  - pvc.yaml
+  - rclone-role.yaml

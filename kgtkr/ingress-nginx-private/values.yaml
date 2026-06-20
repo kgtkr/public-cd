@@ -1,0 +1,18 @@
+ingress-nginx:
+  controller:
+    allowSnippetAnnotations: true
+    config:
+      use-gzip: "true"
+    service:
+      ports:
+        http: 8080
+        https: 8443
+      annotations:
+        metallb.universe.tf/allow-shared-ip: "true"
+        metallb.universe.tf/address-pool: local-ips
+    ingressClass: nginx-private
+    ingressClassResource:
+      name: nginx-private
+      enabled: true
+      default: false
+      controllerValue: "k8s.io/nginx-private"

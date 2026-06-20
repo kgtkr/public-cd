@@ -1,0 +1,4 @@
+namespace: ddclient
+resources:
+  - ddclient.yaml
+  - ddclient-config.yaml

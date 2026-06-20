@@ -1,0 +1,22 @@
+kubernetes-event-exporter:
+  extraEnvVarsSecret: kubernetes-event-exporter
+  config:
+    logLevel: error
+    route:
+      routes:
+        - drop:
+            - type: "Normal"
+            - namespace: "longhorn-system"
+              reason: SnapshotDelete|SnapshotUpdate
+          match:
+            - receiver: "slack"
+    receivers:
+      - name: "slack"
+        slack:
+          token: "$SLACK_TOKEN"
+          channel: "kubernetes-event-exporter"
+          message: "{{ .Message}}"
+          fields:
+            namespace: "{{ .Namespace }}"
+            reason: "{{ .Reason }}"
+            object: "{{ .Namespace }}"

@@ -1,0 +1,13 @@
+external-dns:
+  policy: sync
+  registry: txt
+  txtOwnerId: external-dns
+  provider: cloudflare
+  env:
+    - name: CF_API_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: cloudflare
+          key: token
+    - name: CF_API_EMAIL
+      value: kgtkr.jp@gmail.com

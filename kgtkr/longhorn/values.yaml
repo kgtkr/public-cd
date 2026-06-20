@@ -1,0 +1,14 @@
+longhorn:
+  defaultSettings:
+    backupTarget: "s3://longhorn@us-east-1/"
+    backupstorePollInterval: 3600
+    backupTargetCredentialSecret: aws-secret
+    engineReplicaTimeout: 30
+    defaultReplicaCount: 1
+  persistence:
+    defaultClass: false
+    reclaimPolicy: Retain
+    defaultDataLocality: best-effort
+    recurringJobSelector:
+      enable: true
+      jobList: '[{"name":"snapshot","isGroup":false},{"name":"backup","isGroup":false}]'

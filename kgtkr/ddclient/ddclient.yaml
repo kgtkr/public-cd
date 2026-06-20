@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ddclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ddclient
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ddclient
+    spec:
+      nodeSelector:
+        kubernetes.kgtkr.net/node-lan: home
+      tolerations:
+        - key: kubernetes.kgtkr.net/unreliable
+          effect: NoSchedule
+      containers:
+        - image: linuxserver/ddclient:3.11.2
+          name: ddclient
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "20Mi"
+          volumeMounts:
+            - mountPath: /config-mount
+              name: ddclient-config
+              readOnly: true
+          env:
+            - name: TZ
+              value: Asia/Tokyo
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - cp
+                  - /config-mount/ddclient.conf
+                  - /config/ddclient.conf
+      restartPolicy: Always
+      volumes:
+        - name: ddclient-config
+          secret:
+            secretName: ddclient-config

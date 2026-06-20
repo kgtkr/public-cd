@@ -1,0 +1,17 @@
+# ipを保持するための設定: externalTrafficPolicy, metallb.universe.tf/loadBalancerIPs, nodeSelector
+# externalTrafficPolicy: Localにするとallow-shared-ipが使えないので一旦ip保持をあきらめる
+ingress-nginx:
+  controller:
+    allowSnippetAnnotations: true
+    config:
+      use-gzip: "true"
+    service:
+      annotations:
+        metallb.universe.tf/allow-shared-ip: "true"
+        metallb.universe.tf/address-pool: public-ips
+        metallb.universe.tf/loadBalancerIPs: 163.44.96.193
+    nodeSelector:
+      kubernetes.io/hostname: can
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        effect: NoSchedule

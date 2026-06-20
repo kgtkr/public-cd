@@ -1,0 +1,21 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: ddclient-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    password: AgCkP35+voWUmfP5VH166q39ryvy8gI84zu6JTF1MjCji4ozta+B6YezASjrZA7ZQYvNAfBSc0nQErIbZx1flB+VyORGKGUHj+SvyMZ5LjgdDSQtMYklcnfZ+Ni5lymwlklB0cCpbM4ntxD3cYttCkKBtY1EgyyniZsvlHxRW6D7xY3uftM9OgYfT9mtF8sO0TgsBpKc6XCWvuwaPGzjEk43d29JZ/P07cMrLCEfLRtErRudyts5TviO/J83UHEbySQWx34nwyR5VdWbOxX1XEeCLewYETayBpGnbolgX62yETFOnJ3hqAPaM8pVP5WQhGrtAhtx9WahWyeDI+vOTiqlLk81Ec3GJjGBWGvCkitTqBShStcAtVwkLqh4ceS9vc5kQgv5+M0TRBMDqip2bYi3S5IHcz5rFOkIUT6nJ7VYVceBzG3ZT9cJP57hZ37Sw7GWYxGFz7YEkFKB+gF7xSwAIzEJlpAaNiihHwaSTJKGsRMRiS2YvDr/yWJacXloGVMHicGHhn0S1PpQ+OEMfvR1Y8cJIRRMgI4x+fJ6Xc1EfOSSuVp2fBzYdRtG+/D//g8qB2/C9tO6Lma0lLhM06sfpq61Gu6WNYZDiITviKLulKYHsDhTlyKtjP6Iiztg1WeDZ+qGtl+zywscPI0jzaTxZNTnGEzOziMekFrzeP+JQBQy7mXjwuMxWryX2zlPzNF75qQYbtam5gq2USW3ll64NfEIaAyXeFTGmHhFT2gTmbE4vVL2
+  template:
+    data:
+      ddclient.conf: |
+        daemon=60
+
+        use=web
+        ssl=yes
+        protocol=cloudflare
+        login=kgtkr.jp@gmail.com
+        password={{ index . "password" }}
+        zone=kgtkr.net  
+        home.kgtkr.net

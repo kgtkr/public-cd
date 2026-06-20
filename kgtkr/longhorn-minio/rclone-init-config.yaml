@@ -1,0 +1,31 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: rclone-init-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    clientId: AgA+Oy7ySnqSi/KfGwvLz9kttUtlxy+h7KPfuq1qPXuwwTHCo/s+R3Jkm8+OYansV6v/+howmVRn1k/u/Pj+FBWQ3x5mJp68plyxGCkL0yferZsTyuEIhcg/39ytHm0NuoK/PeFeVihW7mKl04u1XE2saeKdflZeBtQHOX9QhEkfIODXK14c4l853ccoSyS4CXGx2JYqlq/LxYjPwKbPBsR+sN/cLvGcKO3DrJIEjfXiTgrPuP+na5+P1JWohFaH3efbm4oJeg5CKsYde84fnZLk0QsGbXV8prBVDxsos2TBO9h8MNfa+nK5vgAuSvI3eDL3niiu31ykiiAmGgrdnjuHafdbyocPs6taUUf+6OnbE3KgnBzH+YqO2QHnDIA9TfcV9pyGHmnRwQg0eer3G+e04t3rhmGLq9J1UnzStOxkyJO3JcYonAhTw4B1G1jn8xVGNChrGMnzE8PUDQff+FIX0J7AGbpIwLlQ5jrI7Dfdsn2w8KAM1TuYlrq1tX44oct9TjL0bhuq7l/SysUeW29Y6wRVMfD0/694qSoXf9LJtOS7inpbbzkOZ/dkERcA14FQTcSVLDbVk+oSJX3Cnb6jG7/getSP2c5dS08ttmHyrHlTorwzSKXlgNWuaERof5j1/Wf6ldKJpkel7KwkhhPuUfNOEKNtI6RCiorEj1xW8WUiZWQ7gzKP9ktQAvItYNnQYMdKQaXw2vFRv6k08NOcyhzjJcwF6LyYt9kuxu1GBdWdU1+jAVPtrqRsmAqbJ0Qmj3Nxwz+0/aWM2307a97fK53B8JUnQZU=
+    clientSecret: AgBKiO71jqtFVz2/Reug0I2A3LVD673pe8bEaO0TJ/KbDC8dj3f8mb1uJM+qa9UaAceJxMnv8JGPfBD8wwNxgiC+C6PC/w7njDHxcVQFZRy/MmEt5OCRBclpsyvvaq2XnPbu37yOUUtfuN338FQUosyCcA2r9hJBDY6/57XR36TVVAxV8pmpltbkZGR2C3XES5SNZkF8O6F2zhNFve53cbgxOz2qkxgVUHbG1ZnhsIHZmH2ofA3mKa2fR9LnXCKJgwyLB9GfkKizoIqrTw47cxeUg8lMuIP9v0rAOYpGB9jU/mhJkWzg44mpbJXa6g4HLCEW7jFSJaJH5bV+yeq3onl3/5UzNZVqFMppQ8HRkRXaONqCZtrHM13sycGYSE+8cxSRLrKrHlQ1Vz1leO7SW3fb9JyrEvvx0iaftSs8s1Bk64VoqVKl2uZKynt1+Mj2rmH3xvQLWpytBMnpPFze/ARyz4EShVicQQTMPOBmgjm7siveY9GY/yIan6ZzCgBXNxoqRSEx8S9ifDcdXPI1zitTgReeqIen808NsTkI5ilC8Qm7aQ0PUnr7G40C0fpSylmO4SQxO3E4fPekZoRlzVdoyRx6Ixy8E0FwymrnnlqjCTywnzJKW5VeC5cU7jBmqu8KPCHY5hEIiESiM7YuaFxdYKz8dHV3BqNgMcGnc0uZFPVo1mCcOkwPjYKibQ2DJLpnLti/YEZF5pbAM/WGqXfy2vJnGmrHPgpYYDwpudBJ1fE50w==
+    token: AgAQ/a9AzGGOG+pMBhpGHcqsaFumSk0UMGfohZpkkaPF6iqA+Hn9PLK7qSKDOhtWIRnWFaw2FL43KpLR0FparKmuT4jckPsVW6RxxrRzUpetmrDcqxvO5LZurGt05Mcnsqpbhg95ceWEx4Q/Q9rXmcbyMZi3p1tW4NdU3mgfVvbnb1J1sb7yTpXqrlHYIXyFbWm8F8wHDzlnDPAxAAzBy6BUM0uwSieXjfsgRKBK9qBlysgmvqC2X9qEi/J6ksApBCmtpUcufsh+ufnPvtiC0nUZlTUnExwFc71DC+6akh6Ykk52iPSToyhfPYVXV25+AybRukEeIz9FcaFk2WMHqFc/zWoIxNpEyOYkOng9hTP5/4zJLcw6y5zyT3R4Sh0SyBeG1nWor5ye7hVc1Rm5K7yJv1QXDtpaHh/B73FXMhsOHhgeBkArNSM5kZP/eR36PVEp1EWRWdDkuWFEJntJxbtNawtH42bQJI8MkGsAqCwLCqXU46WZsoQ99kg91djhunWfJRyHRzc25S0olRr2pP//vVN54LVotaVWW9uoG3Jlz1ZUmruxVAnlU3MYSfaO1F7SOJ/q132zJIh5boHajaqNTuQpC4sKJGkwv1KPB7+oupkCV5TjyIIg3mA/ZY087ngtuQqlhZrLk7PKvL9rp46ozXTQAlTZmUsQ0AJFZY8+g/USDF+SNWcTPCCHhSFBnNZ9VHVOC9b8/DiXXdnOF2GbWDksqkNLqpVPAexxe09xMIKIOdEWcicKiYWszVRJRSqmZihsiYikdRC1Ezjw13VSnPIUI4ysjgWllAbT912FrW3oFBWLFMJDfeQYaOW7o1nO6SN44RdIBZN7Z/73J0QcuTUvTe1CAzwtJghAXMDasZZuMSjEPbUZ+4fy/h4QGKYXJWIrW6uRn8G3X67X4UhbwSkhRu0WCsQkvQPG30zhfHVmI42gEjJglf/yl+4pNxo5RrX/wtypAXKPkHEeiP9GjIuBmqak1+RNnshYh+YEW1+WAXBFShnfD4MjwG3LUQLK8bqCnPQ4Eqn449Ve8RYl8MHuOSlzagyY0L8ZkgvA01awiGjxeZ8TiHgExpn0GiUWSdfNF2SsLuVhcrX9LpNzGtSj83IkizjMHt283ICvADMe+xvaI51fSms+8Y1GGMrOrd9b5Nkssm0tpdyuoLoAxccm5LYDfyZ9aIQrG2eGLG06eNB4/+V/FJPry/Cp5DYNK557bOZ/UoULS3seaR+tJ32wpucXK5gdwSOXCIY+20Ql5RgsEmOtUGdKzA==
+  template:
+    data:
+      config: |
+        [minio]
+        type = s3
+        provider = Minio
+        env_auth = false
+        access_key_id = Fhv5pGFGYLjBCc
+        secret_access_key = fZfT7gbT3sSeo7q4UPwX4phx
+        region = us-east-1
+        endpoint = http://minio:9000
+
+        [gdrive]
+        type = drive
+        client_id = {{ index . "clientId" }}
+        client_secret = {{ index . "clientSecret" }}
+        scope = drive.appfolder
+        root_folder_id = appDataFolder
+        token = {{ index . "token" }}
+        team_drive =
