@@ -1,0 +1,17 @@
+api-endpoint = "https://attic.kgtkr.net/"
+[database]
+url = "postgresql://postgres:postgres@postgres:5432/postgres?schema=public"
+[storage]
+bucket = "objects"
+# インターネット経由のルーティングになるので非効率だが、presigned URLに対応させたいので一旦妥協
+endpoint = "https://attic-minio.kgtkr.net"
+region = "us-east-1"
+type = "s3"
+[chunking]
+avg-size = 131072
+max-size = 262144
+min-size = 65536
+nar-size-threshold = 131072
+[jwt]
+token-bound-audiences = ["kgtkr.net", "github.com"]
+token-bound-issuer = "attic.kgtkr.net"

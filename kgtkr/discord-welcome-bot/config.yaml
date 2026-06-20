@@ -1,0 +1,21 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: discord-welcome-bot-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    token: AgAbmOldIZYGbxAxduKKou1cHRvNSV6/eKsUfiM73iDxWAz59S4m6EoAg+6ys3epzkR+Y6kKyh3thIEs649Jjcfdvpy1Efk5FY3xs3wRjnywukueRRhp1fIdx5iUU0xxFd+h9aH5ycyp+Omb9kF4ga2TccOBApH7jfYldRwawJRAtUWiviKyEHfy5Fn011DTTobYbW9ckOWMyrzn0JsWJLg4zKhMyX2ONUyd1J0cVSTW+n3SoM/liw2og+ksuh4UqpVVVlS5obW2ufNN2p+NRQ9NVt8v65mfTlN1iOPUquKAqiPMzfSAFLeDn0Z6iZcuMiCAbTOkl7fCy1x8JB/zdBmOXRErguexR6/6uaxjeMm6vQoNQ6gurk5h4v3dngicIKgjE+86XOGEDWdv7lU61q923ua6LEmU3qT18cru/o4EEw7zQ0SMyEAaZT5BxOfNK4JTLFfRco0l1zm0wPTmTw0x9xJYHKT6lVQdN5997Ncnag3J/DqhjQ/PrwqUnVJlf86TDGko+f3Bw6OAoRGMt/VOy7ic+F+k9rSKFzqMqm6PW9bDYfglRO6xBUBFtS5+FncNEKGywutpbFxN98IFHdvPxWEqA2yxBYzZ1b4ZGxkkLUGKpjNY5VXzoDU9tCa+pf9sYhgBV82hjlx1d/9i71m2jksNU0UwGtDDs2YLV9xXlsjUVUC8cd5el1nxoK4QCh0AemiLXLOjRmVhFDEyZJyWm0Hjp7R2GI1JuZTHskj40HGDKqErbEFrk7IW7SyHK8ffxqKRv7r7iYZCHA==
+  template:
+    data:
+      config.json: |
+        {
+            "token": "{{ index . "token" }}",
+            "roles": [
+                "681161921558478918",
+                "686264028795895846"
+            ],
+            "welcomeMsg": "ようこそ。スパムでないことを確認するためにこのメッセージに:+1:など何らかのリアクションをして下さい。",
+            "conformMsg": "リアクションありがとうございます。発言権限を付与しました。まず<#711412977735172147>を読んで下さい。次に、もしよければ<#681148435524616193>で自己紹介お願いします。(てか第五人格やってる？by 水死体)"
+        }

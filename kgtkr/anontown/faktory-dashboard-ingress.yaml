@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: faktory-dashboard-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required "
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+spec:
+  ingressClassName: nginx-private
+  tls:
+    - hosts:
+        - anontown-faktory-dashboard.k3s.kgtkr.net
+      secretName: faktory-dashboard-ingress-cert
+  rules:
+    - host: anontown-faktory-dashboard.k3s.kgtkr.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: faktory
+                port:
+                  name: dashboard

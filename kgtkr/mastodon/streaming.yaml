@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: streaming
+spec:
+  ports:
+    - port: 4000
+  selector:
+    app.kubernetes.io/name: streaming
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: streaming
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: streaming
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/mastodon
+          name: streaming
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "500Mi"
+          args:
+            - node
+            - ./streaming
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1
+          envFrom:
+            - secretRef:
+                name: mastodon-config
+            - secretRef:
+                name: mastodon-secret
+      restartPolicy: Always

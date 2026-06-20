@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: discord-category-join-manager-use-message-command
+  name: discord-category-join-manager-use-message-command
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: discord-category-join-manager-use-message-command
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: discord-category-join-manager-use-message-command
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/discord-category-join-manager:20220221133340180-94b9e4d-use_message_command
+          name: discord-category-join-manager-use-message-command
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "15Mi"
+          volumeMounts:
+            - mountPath: /var/discord-category-join-manager-use-message-command/config
+              name: discord-category-join-manager-use-message-command-config
+              readOnly: true
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - ln
+                  - -s
+                  - /var/discord-category-join-manager-use-message-command/config/config.json
+                  - /home/app/config.json
+      restartPolicy: Always
+      volumes:
+        - name: discord-category-join-manager-use-message-command-config
+          secret:
+            secretName: discord-category-join-manager-use-message-command-config

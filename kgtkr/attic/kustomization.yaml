@@ -1,0 +1,35 @@
+resources:
+  - api-server.yaml
+  - attic-secret.yaml
+  - garbage-collector.yaml
+  - db-migrations.yaml
+  - minio.yaml
+  - minio-console-ingress.yaml
+  - attic-ingress.yaml
+  - postgres.yaml
+  - minio-ingress.yaml
+configMapGenerator:
+  - name: attic-config
+    files:
+      - config.toml
+  - name: attic-env
+    literals:
+      - RUST_LOG=info
+images:
+  - name: ghcr.io/zhaofengli/attic
+    newTag: ff8a897d1f4408ebbf4d45fa9049c06b3e1e3f4e
+patches:
+- patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: attic-config
+      annotations:
+        argocd.argoproj.io/sync-wave: "-2"
+- patch: |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: attic-env
+      annotations:
+        argocd.argoproj.io/sync-wave: "-2"

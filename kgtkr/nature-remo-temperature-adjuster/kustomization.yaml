@@ -1,0 +1,9 @@
+namespace: nature-remo-temperature-adjuster
+resources:
+  - app.yaml
+  - app-secret.yaml
+configMapGenerator:
+  - name: app-config
+    literals:
+      - DI_MIN=65
+      - DI_MAX=77

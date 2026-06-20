@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: discord-vc-disconnect-bot-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    token: AgARKZLSrlEEYMw4mLUzzn2C3T2SuOkfuwQTQ8HqKgXP+2dvsgbFKeeb7NgQ2E1T6XfswD5tuTSqiBxgFMFZRI8V6GuCPUkdAQH1sZ0MgGC5MZ+D05IwHkSEqvnBuFzHpwpCfECC1Oy1CqpheB6K/f0Blrab911MvZwhBDRwHBvInBobX8VkUyBdCqjcF7DwOwn1R4CHy6MKbeaX6BukP6SRdc1RKE3xIGZbc0XmVf/brsy1gKkHWbee1mFgHuPdAc6HG0Rt9V/Tn8hbKjC5lll0peYxj6IBKAg3/m9Uq1LPmwrIeQ4xWK4B+EtPdHKKLJfPxnLZWXX+eIj34VJzsUEYmdlD5Sok37FDbwFBDdIk7RXJH6IC2bLRncCnwxNdzFi3cHWoIh+H704fdZFulR++64vffvFhitTd/CaPFoniizaVSIb4NePQE6l/iMi4VJSGY6ph/fn/FO4KRlxR5CuIZZYP6K9BWYwLRojkcvcEK0LRkJDadHMOyCRfh1f23iZhZ1qkBTUEcPPESUZfi0IQ2Dskj+VE9N1+oc0FXiwK0JqF4Rtt6JLN2RxIrddkyol4qr2Ca09YyuyfJ6PstLm0DG+jqdhXi0+hxf/HuFZBG5T+KH8D0qH4Wem/ur9hVxgrtsh2baaKnXx3wbkjLGQTnqbPNGTZXCGrXpbRPJtw9rgv+Pi21x9edvUu793PVVssc5oife5lNxUVhood/UtTpYvEhL/x6uXuzjH1K2Ew60k5Lx81+D6m22LktQyQqMCu8j288rfFJInewA==
+  template:
+    data:
+      config.json: |
+        {
+          "token": "{{ index . "token" }}"
+        }

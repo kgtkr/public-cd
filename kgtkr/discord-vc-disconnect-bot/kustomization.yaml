@@ -1,0 +1,4 @@
+namespace: discord-vc-disconnect-bot
+resources:
+  - discord-vc-disconnect-bot.yaml
+  - config.yaml

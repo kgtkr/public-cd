@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: discord-welcome-bot
+  name: discord-welcome-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: discord-welcome-bot
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: discord-welcome-bot
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/discord-welcome-bot:20260620100159187-5ae7610
+          name: discord-welcome-bot
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "15Mi"
+          volumeMounts:
+            - mountPath: /var/discord-welcome-bot/config
+              name: discord-welcome-bot-config
+              readOnly: true
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - ln
+                  - -s
+                  - /var/discord-welcome-bot/config/config.json
+                  - /home/app/config.json
+      restartPolicy: Always
+      volumes:
+        - name: discord-welcome-bot-config
+          secret:
+            secretName: discord-welcome-bot-config

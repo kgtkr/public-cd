@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: garbage-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: garbage-collector
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: garbage-collector
+    spec:
+      containers:
+        - image: ghcr.io/zhaofengli/attic
+          name: attic
+          args:
+            - -f
+            - /opt/attic/config.toml
+            - --mode
+            - garbage-collector
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "300Mi"
+          envFrom:
+            - secretRef:
+                name: attic-secret
+            - configMapRef:
+                name: attic-env
+          volumeMounts:
+            - name: config-volume
+              mountPath: /opt/attic/
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: config-volume
+          configMap:
+            name: attic-config

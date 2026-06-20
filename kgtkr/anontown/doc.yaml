@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: doc
+spec:
+  ports:
+    - port: 4928
+  selector:
+    app.kubernetes.io/name: doc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: doc
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: doc
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/anontown-doc:20240210180820143-e390199
+          name: doc
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "5Mi"
+      restartPolicy: Always

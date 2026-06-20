@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: remove-media
+spec:
+  schedule: "0  2  *  *  *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          tolerations:
+            - key: "kubernetes.kgtkr.net/unreliable"
+              effect: "NoSchedule"
+          containers:
+            - image: tootsuite/mastodon
+              name: app
+              resources:
+                requests:
+                  cpu: "10m"
+                  memory: "300Mi"
+              args:
+                - tootctl
+                - media
+                - remove
+                - --days
+                - "3"
+              envFrom:
+                - secretRef:
+                    name: mastodon-config
+                - secretRef:
+                    name: mastodon-secret
+          restartPolicy: Never

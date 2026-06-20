@@ -1,0 +1,4 @@
+namespace: echo-server
+resources:
+  - app.yaml
+  - ingress.yaml

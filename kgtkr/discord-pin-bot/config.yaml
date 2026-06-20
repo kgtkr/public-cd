@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: discord-pin-bot-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    token: AgBClAE+yE4C/YtxYhRaoV1KGOgx4wPMZmFAZ9sMMuDkDR7tP5k9IF1P1LtTL8peqlpr+YUXgcuW0nSNGWH6kwYdbQ3wrbRS5i6xKnEtOb7HGuPHFNxM+crmAU4pESa+tQHzNgujlc03Me0hwnKWtEJjxC/xXXpHgRoIwHdwW0QSCD4sYsXTckv0U6vWSJv9TJIIGY8Y9zAv99jddel94OGTGJIYEmJIrzs5eStJWLc1IW8y9Fj5SM9zxk4dcmHrkM17oA2l+ndY1BF6hRLwKAEDjwr/o+RlraLgUbTG5qHTWETptK4VmDsxIp95SQfatCum8/YOxhpZs2+nHyj7JJzbYtbQpgqXavgOlwJbhzX2QyZ6mZKB3l1dhdG/M4GDGDyYwwVjiGF3BjzoC96srChBo68rcOhE55JrUZIp1BO8hSHnlyrEiLf3KSw1Ha7tBK4bPeihXNXZD5ytBcHerbBF0vRAc7fQ4R0cmIv0xHkW1vjMu8D6Yi442rHi1j4QttvJVbsgF0tlYmlDnpBwo3FSDfBJbLCvHmUvcXomU9V7Hi1D0gPg6Zu3u+hoaFwrwRL3ddleJpNWuCOlJkRtpEdyOULR872pMw2d/M/GYDQY4HfXv+fo4yufL6hbR78UEmrlSZApeTVU4vn8Mt9d0dh4nTNHHVuOQGSELnFRrIFoQfOwfC8O3mS4QLu3Daad+MV8uQXX436+veefqgLCZ7Z9isxMwhcm87U+TcG9nMcNVn7IjOxka9ZKrAFOahytx0abrJ5dN0bLnCkQGw==
+  template:
+    data:
+      config.json: |
+        {
+          "token": "{{ index . "token" }}"
+        }

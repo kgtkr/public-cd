@@ -1,0 +1,25 @@
+resources:
+  - postgres.yaml
+  - redis.yaml
+  - web.yaml
+  - streaming.yaml
+  - sidekiq.yaml
+  - minio.yaml
+  - ingress.yaml
+  - es.yaml
+  - search-deploy.yaml
+  - prune-profiles.yaml
+  - remove-orphans.yaml
+  #- remove-media.yaml
+  - minio-console-ingress.yaml
+  - mastodon-secret.yaml
+  - mastodon-config.yaml
+  - minio-config.yaml
+configMapGenerator:
+  - name: minio-policy
+    files:
+      - policy.json
+
+images:
+  - name: ghcr.io/kgtkr/mastodon
+    newTag: 20240826020118270-a930410-mstdn.kgtkr.net

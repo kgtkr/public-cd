@@ -1,0 +1,9 @@
+namespace: discord-join-category-bot
+resources:
+  - discord-join-category-bot.yaml
+  - app-secret.yaml
+configMapGenerator:
+  - name: app-config
+    literals:
+      - DISCORD_APP_ID=1181622348605051060
+      - DISCORD_GUILD_ID=1177632806260707448

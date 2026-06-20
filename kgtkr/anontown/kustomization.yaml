@@ -1,0 +1,16 @@
+resources:
+  - server.yaml
+  - redis.yaml
+  - camo.yaml
+  - client.yaml
+  - doc.yaml
+  - ingress.yaml
+  - postgres.yaml
+  - faktory.yaml
+  - faktory-dashboard-ingress.yaml
+  - basic-auth.yaml
+  - secret.yaml
+configMapGenerator:
+  - name: anontown-config
+    envs:
+      - .config

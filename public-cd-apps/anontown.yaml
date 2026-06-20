@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: anontown
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: public-cd-apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: anontown
+  source:
+    path: kgtkr/anontown
+    repoURL: https://github.com/kgtkr/public-cd
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

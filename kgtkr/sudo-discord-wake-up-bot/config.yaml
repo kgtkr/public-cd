@@ -1,0 +1,32 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: app-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    token: AgCVwaZhtAHdUlLolcqdbpioBjMtNXbgaRfDFCpWYEWqHBOLGw7B7U3FIYdEVt+2tLHp4cIClElNP/Ko8bWafD0qlC+leIu6mgIzW/0dC3OPD3KxBPOgTWdQIrpCNqhoRfsQ+YBpKTStO4xX9n5xjiD7GytVfH+p0azmVu5mJGyU8ljmrazad1tgFq3+4XNphqsUdvreAGV48f+D3kbp0Z0e3SkcVYYQe1Mp91aLLZICK9StecZb1Eb7E7dpgKWY7yCGx8hxfE3PTS1T/r5Kw2KILJ+De5BUzojbSh0MpSMft279FYak+zNxejXlBgiHpt+25sJzEnBlC5LQdvJmmtVeOfPWc1pFaUdet9Qzr+7Z863glXmba9v8/cKnlo6fVZR8wKTbC3UBVxO5xNaR0j2ucPCYJPWvg5l3iR7ePNS6YfdamYYCtxhRSWwk+4uJiIi3Ol/vGc3CCUQTAcgWwK9DU3FM7qPzRIW4JENAeDIhXBX13YQKHq8DO2CDgYYxjE/5OsCWtw3lr+oZLhgH2HjEzM9Ytpk3QXT7aC0Rztdly0fdmCjuyG0+Z9tCbreYZnqoInLxAhtHU9+y94Spdd62C+aLW5bKW9A13QYRyCmA1cxWlkbyPXSf/13+yKYX4bwHdcF0zpiYHOXx0SaLgIDzO5HCT4MgApWQHzqnNZ/IuYTKwEEooWVeLAhvTQ//9Kfm2pzFgiYCPKhaLxQuyA3RmR/JLexJ4YSwCnlP+fZOODEDgSQiC+zF4oBmSuAdrWf4Easv7SfECORyVQ==
+  template:
+    data:
+      config.json: |
+        {
+            "token": "{{ index . "token" }}",
+            "appId": "913317986931200030",
+            "guildIds": [
+                "809090054055919636",
+                "589426495232147456",
+                "582910804152680448"
+            ],
+            "castHost": "192.168.11.9",
+            "contentUrl": "https://esffects.net/data/361.mp3",
+            "commandName": "sudo-wakeuptkr",
+            "commandDescription": "sudoおきろてけら",
+            "replyContent": "We trust you have received the usual lecture from the local System\nAdministrator. It usually boils down to these three things:\n\n\n#1) Respect the privacy of others.\n#2) Think before you type.\n#3) With great power comes great responsibility.\n\n\nてけらを起こしています",
+            "acceptUserIds": [
+                "699116089996607511",
+                "336303386939097091"
+            ],
+            "rejectContent": "You are not in the sudoers file.  This incident will be reported.",
+            "volume": 0.3
+        }

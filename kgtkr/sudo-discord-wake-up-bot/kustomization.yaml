@@ -1,0 +1,4 @@
+namespace: sudo-discord-wake-up-bot
+resources:
+  - app.yaml
+  - config.yaml

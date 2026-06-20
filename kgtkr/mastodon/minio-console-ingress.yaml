@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-console-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 1g
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+spec:
+  ingressClassName: nginx-private
+  tls:
+    - hosts:
+        - mastodon-minio-console.k3s.kgtkr.net
+      secretName: minio-console-ingress-cert
+  rules:
+    - host: mastodon-minio-console.k3s.kgtkr.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  name: console

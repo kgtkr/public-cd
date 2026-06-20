@@ -1,0 +1,9 @@
+namespace: remo-allowlist-alarm
+resources:
+  - app.yaml
+  - app-secret.yaml
+  - redis.yaml
+configMapGenerator:
+  - name: app-config
+    envs:
+      - .env

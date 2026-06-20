@@ -1,0 +1,49 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: discord-wake-up-bot-config
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+spec:
+  encryptedData:
+    token: AgB5tG6s1A6mJrDpy1hUUZn+SJCFbuWGeZ1yQIBvAXF/qjIr/Tceffx+AWowGJXS4qOnYdY3Gm0Skot2O+Kdsy+/61IyHu+/+ft64gQcG0SDmQau95XGJwTcItt+yzEbmCc8zLYwsc4XQ6zaz5/ir1DKTtRv3a36qJdkOsr4wYTt4PkwpJjbbZFrgPZ2BZFshoDBeOwhZt42AnBqLpQBul9692XNW2Y84VYfit1MpiEoF4JTC+xmY7sev2TFqDUtXM4d1g+mMUykHpsXQheAP7a9ayj90qg/fOITR2amW3sg94gUpYPTN8w5t8guDeRVJvd98C51NFrSIsd24vW1agvNshri88ejUI4irLYkb06aDmahItol6PSWTOrmiDHXvoamamdeik3EpYMve1sXxnRXT9fjvhqWeo3G6o+gQCfBhM5pfKetp9aqgkHv6pB2ebq9fMh+uOWn1e+/6EOP/fhufrUmPoq2pYLoqMvP+GERC8BrNLwTpLF/bXUESL3TbbB1jmsAqvZBVuabiMlrHcorLj5r/ptkUYqjKRDClciJiyHTCA4CgW/O8fMY4Z75xTWV5uqLbpIjeZeteOMvozC/Iv6GJW8RRq6I1LZarz23OAWk+WD0YeORhW/1vpGLugGLjLr8GQIwBZpp61u9dzmpUr9id/KjRM1kCWPpcbqD/sq3sCpDf13L4V08uWh6+AKmDc7ofOITNm99BLCkFvnLHuIFSmls7rgfuah6h0GQPtMH2XD1G0cyHC/FIn0yI2Lj7zUyCknpP8p13g==
+  template:
+    data:
+      config.json: |
+        {
+          "token": "{{ index . "token" }}",
+          "appId": "913317986931200030",
+          "guildIds": [
+              "809090054055919636",
+              "589426495232147456",
+              "582910804152680448",
+              "1106200984822222980",
+              "1177632806260707448",
+              "1292160962039906387"
+          ],
+          "castHost": "192.168.11.10",
+          "contentUrl": "https://esffects.net/data/361.mp3",
+          "commandName": "wakeuptkr",
+          "commandDescription": "おきろてけら",
+          "replyContent": "てけらを起こしています",
+          "acceptUserIds": [
+              "699116089996607511",
+              "336303386939097091",
+              "790408039994884177",
+              "801029904249651202",
+              "615382790694764554",
+              "811954426796572733",
+              "848539847575732255",
+              "478411133724655627",
+              "1079269941343158322",
+              "1256570085095768125",
+              "690317046432792599",
+              "848054856463286282",
+              "988364603446681610"
+          ],
+          "rejectContent": "だれおまえ",
+          "volume": 0.2,
+          "rejectStartHour": 3,
+          "rejectEndHour": 8,
+          "rejectHourContent": "寝てる時間です"
+        }

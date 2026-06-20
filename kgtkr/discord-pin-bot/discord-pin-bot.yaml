@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: discord-pin-bot
+  name: discord-pin-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: discord-pin-bot
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: discord-pin-bot
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/discord-pin-bot:20260620100054911-e0e9d8a
+          name: discord-pin-bot
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "15Mi"
+          volumeMounts:
+            - mountPath: /var/discord-pin-bot/config
+              name: discord-pin-bot-config
+              readOnly: true
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - ln
+                  - -s
+                  - /var/discord-pin-bot/config/config.json
+                  - /home/app/config.json
+      restartPolicy: Always
+      volumes:
+        - name: discord-pin-bot-config
+          secret:
+            secretName: discord-pin-bot-config

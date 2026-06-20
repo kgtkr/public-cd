@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app.kubernetes.io/name: server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: server
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/anontown-server:20240210180143496-48f1843
+          name: server
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "100Mi"
+          envFrom:
+            - secretRef:
+                name: secret
+            - configMapRef:
+                name: anontown-config
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: TZ
+              value: "Asia/Tokyo"
+            - name: REDIS_HOST
+              value: redis:6379
+            - name: DATABASE_URL
+              value: "postgresql://postgres:postgres@postgres:5432/postgres?schema=public"
+            - name: FAKTORY_URL
+              value: "tcp://faktory:7419"
+
+      restartPolicy: Always

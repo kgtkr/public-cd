@@ -1,0 +1,8 @@
+namespace: renovate
+resources:
+  # - renovate.yaml
+  - renovate-env.yaml
+configMapGenerator:
+  - name: renovate-config
+    files:
+      - config.json

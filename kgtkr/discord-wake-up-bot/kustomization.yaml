@@ -1,0 +1,5 @@
+namespace: discord-wake-up-bot
+resources:
+  - discord-wake-up-bot.yaml
+  - config.yaml
+

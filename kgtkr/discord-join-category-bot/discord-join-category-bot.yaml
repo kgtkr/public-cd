@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: discord-join-category-bot
+  name: discord-join-category-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: discord-join-category-bot
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: discord-join-category-bot
+    spec:
+      containers:
+        - image: ghcr.io/kgtkr/discord-join-category-bot:20231210161002013-f13877b
+          name: discord-join-category-bot
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "15Mi"
+          envFrom:
+            - secretRef:
+                name: app-secret
+            - configMapRef:
+                name: app-config
+      restartPolicy: Always

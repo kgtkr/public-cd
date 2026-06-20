@@ -1,0 +1,4 @@
+namespace: tkvs
+resources:
+  - tkvs-server.yaml
+  - tkvs-ingress.yaml

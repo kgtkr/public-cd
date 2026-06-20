@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tkvs-server
+spec:
+  ports:
+    - port: 50051
+      name: grpc
+  selector:
+    app.kubernetes.io/name: tkvs-server
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tkvs-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tkvs-server
+  serviceName: tkvs-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tkvs-server
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      containers:
+        - image: ghcr.io/kgtkr/tkvs-server:20220814015037040-bd0adfc
+          name: tkvs-server
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+          volumeMounts:
+            - mountPath: /data
+              name: tkvs-server-data
+              subPath: data
+      restartPolicy: Always
+      volumes:
+        - name: tkvs-server-data
+          persistentVolumeClaim:
+            claimName: tkvs-server-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tkvs-server-data
+  labels:
+    recurring-job.longhorn.io/source: enabled
+    recurring-job-group.longhorn.io/backup-weekly: enabled
+    recurring-job.longhorn.io/snapshot: enabled
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: tkvs-server

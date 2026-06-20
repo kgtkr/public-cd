@@ -1,0 +1,4 @@
+namespace: discord-category-join-manager-use-message-command
+resources:
+  - discord-category-join-manager-use-message-command.yaml
+  - config.yaml
