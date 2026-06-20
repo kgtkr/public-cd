@@ -3,8 +3,7 @@ kind: Application
 metadata:
   name: longhorn-minio
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  finalizers: []
 spec:
   project: default
   destination:
