@@ -4,3 +4,4 @@ resources:
   # - minecraft-bedrock-server.yaml
   - minecraft-bedrock-server-idv.yaml
   - kgtkrnet.yaml
+  - discord-category-join-manager.yaml
