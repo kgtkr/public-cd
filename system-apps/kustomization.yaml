@@ -1,3 +1,14 @@
 resources:
   - cert-manager.yaml
   - argocd.yaml
+  - ingress-nginx.yaml
+  - ingress-nginx-private.yaml
+  - longhorn.yaml
+  - sealed-secrets.yaml
+  - datadog.yaml
+  - ddclient.yaml
+  - kubernetes-dashboard.yaml
+  - kubernetes-event-exporter.yaml
+  - longhorn-minio.yaml
+  - external-dns.yaml
+  - metallb.yaml
