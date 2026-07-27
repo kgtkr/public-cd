@@ -25,7 +25,7 @@ spec:
         app.kubernetes.io/name: client
     spec:
       containers:
-        - image: ghcr.io/kgtkr/anontown-client:20240210114808699-3a4cc2c
+        - image: ghcr.io/kgtkr/anontown-client:20260612120719229-17dc877
           name: client
           resources:
             requests:
