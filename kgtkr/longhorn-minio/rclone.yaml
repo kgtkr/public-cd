@@ -28,7 +28,7 @@ spec:
               volumeMounts:
                 - mountPath: /config/rclone
                   name: rclone-config
-            - image: rclone/rclone:1.69
+            - image: rclone/rclone:1.74
               name: app
               resources:
                 requests:
