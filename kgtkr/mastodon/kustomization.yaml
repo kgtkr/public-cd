@@ -22,4 +22,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/kgtkr/mastodon
-    newTag: 20240826020118270-a930410-mstdn.kgtkr.net
+    newTag: 20260728153415426-0875e6e-mstdn.kgtkr.net
