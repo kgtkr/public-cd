@@ -7,7 +7,9 @@ resources:
   - minio.yaml
   - ingress.yaml
   - es.yaml
-  - search-deploy.yaml
+  # 毎デプロイ/Sync毎に全検索インデックス再構築が走り長時間化するため手動実行とする
+  #- search-deploy.yaml
+  - db-migrate.yaml
   - prune-profiles.yaml
   - remove-orphans.yaml
   #- remove-media.yaml

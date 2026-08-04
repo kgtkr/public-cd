@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      tolerations:
+        - key: "kubernetes.kgtkr.net/unreliable"
+          effect: "NoSchedule"
+      containers:
+        - image: ghcr.io/kgtkr/mastodon
+          name: app
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "500Mi"
+          args:
+            - bundle
+            - exec
+            - rails
+            - db:migrate
+          envFrom:
+            - secretRef:
+                name: mastodon-config
+            - secretRef:
+                name: mastodon-secret
+      restartPolicy: Never

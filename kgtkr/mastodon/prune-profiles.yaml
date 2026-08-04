@@ -5,6 +5,8 @@ metadata:
 spec:
   schedule: "0  3  */3  *  *"
   concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
       template:
@@ -13,7 +15,7 @@ spec:
             - key: "kubernetes.kgtkr.net/unreliable"
               effect: "NoSchedule"
           containers:
-            - image: tootsuite/mastodon
+            - image: ghcr.io/kgtkr/mastodon
               name: app
               resources:
                 requests:
