@@ -27,7 +27,7 @@ spec:
         app.kubernetes.io/name: faktory
     spec:
       containers:
-        - image: contribsys/faktory:1.9.4
+        - image: contribsys/faktory:1.10.0
           name: faktory
           resources:
             requests:
