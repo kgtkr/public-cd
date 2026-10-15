@@ -21,3 +21,4 @@ resources:
   - discord-join-category-bot.yaml
   - echo-server.yaml
   - attic.yaml
+  - gcsim-mcp.yaml
