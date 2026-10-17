@@ -35,7 +35,7 @@ jobs:
               "branchPrefix": "renovate-dispatch/${{ github.event.client_payload.package }}/",
               "packageRules": [
                 {
-                  "matchPackagePatterns": ["*"],
+                  "matchPackageNames": ["*"],
                   "enabled": false
                 },
                 {

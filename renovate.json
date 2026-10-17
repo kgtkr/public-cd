@@ -8,7 +8,9 @@
       "matchPackageNames": [
         "ghcr.io/kgtkr/kgtkr.net"
       ],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": true
     }
   ]
 }
