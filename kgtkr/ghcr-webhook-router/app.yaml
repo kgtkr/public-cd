@@ -32,7 +32,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - image: ghcr.io/kgtkr/ghcr-webhook-router:20261017105029220-af10ac6-master
+        - image: ghcr.io/kgtkr/ghcr-webhook-router:20261017155622945-aa94950-master
           name: app
           ports:
             - containerPort: 3000
