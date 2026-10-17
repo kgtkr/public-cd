@@ -22,3 +22,4 @@ resources:
   - echo-server.yaml
   - attic.yaml
   - gcsim-mcp.yaml
+  - ghcr-webhook-router.yaml

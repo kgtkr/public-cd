@@ -1,0 +1,6 @@
+namespace: ghcr-webhook-router
+resources:
+  - app.yaml
+  - ingress.yaml
+  - networkpolicy.yaml
+  - sealed-secret.yaml
