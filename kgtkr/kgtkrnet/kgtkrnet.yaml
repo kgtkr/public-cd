@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/name: kgtkrnet
     spec:
       containers:
-        - image: ghcr.io/kgtkr/kgtkr.net:20261019171614216-3979344
+        - image: ghcr.io/kgtkr/kgtkr.net:20261020134049882-05a7392
           name: kgtkrnet
           resources:
             requests:
