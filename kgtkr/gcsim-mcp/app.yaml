@@ -34,7 +34,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - image: ghcr.io/kgtkr/gcsim-mcp:20261016144356816-94b880d-master
+        - image: ghcr.io/kgtkr/gcsim-mcp:20261025100629366-cd416e8-master
           name: app
           ports:
             - containerPort: 3485
