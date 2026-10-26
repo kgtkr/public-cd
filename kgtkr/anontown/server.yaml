@@ -25,7 +25,7 @@ spec:
         app.kubernetes.io/name: server
     spec:
       containers:
-        - image: ghcr.io/kgtkr/anontown-server:20260612120724975-bdeac8a
+        - image: ghcr.io/kgtkr/anontown-server:20260906090735412-b6e1b18
           name: server
           resources:
             requests:
