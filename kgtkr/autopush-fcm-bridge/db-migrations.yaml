@@ -14,7 +14,7 @@ spec:
       containers:
         - image: ghcr.io/kgtkr/autopush-fcm-bridge:20261026142949735-124923f-master
           name: db-migrations
-          command:
+          args:
             - migrate
           env:
             - name: DATABASE_URL
