@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrations
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  template:
+    spec:
+      tolerations:
+        - key: "kubernetes.kgtkr.net/unreliable"
+          effect: "NoSchedule"
+      containers:
+        - image: ghcr.io/kgtkr/autopush-fcm-bridge:20261026142949735-124923f-master
+          name: db-migrations
+          command:
+            - /bin/autopush-fcm-bridge
+            - migrate
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://postgres:postgres@postgres:5432/postgres?sslmode=disable"
+          envFrom:
+            - secretRef:
+                name: autopush-fcm-bridge-secret
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+      restartPolicy: Never
