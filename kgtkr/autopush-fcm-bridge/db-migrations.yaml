@@ -12,7 +12,7 @@ spec:
         - key: "kubernetes.kgtkr.net/unreliable"
           effect: "NoSchedule"
       containers:
-        - image: ghcr.io/kgtkr/autopush-fcm-bridge:20261027140633555-b75da33-master
+        - image: ghcr.io/kgtkr/autopush-fcm-bridge:20261030133320883-4941313-master
           name: db-migrations
           args:
             - migrate
