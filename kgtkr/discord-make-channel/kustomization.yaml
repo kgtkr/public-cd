@@ -2,3 +2,4 @@ namespace: discord-make-channel
 resources:
   - discord-make-channel.yaml
   - app-secret.yaml
+  - networkpolicy.yaml

@@ -2,3 +2,4 @@ namespace: discord-pin-bot
 resources:
   - discord-pin-bot.yaml
   - config.yaml
+  - networkpolicy.yaml

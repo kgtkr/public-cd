@@ -7,3 +7,4 @@ resources:
   - minio-config.yaml
   - pvc.yaml
   - rclone-role.yaml
+  - networkpolicy.yaml

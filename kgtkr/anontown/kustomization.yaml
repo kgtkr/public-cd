@@ -10,6 +10,7 @@ resources:
   - faktory-dashboard-ingress.yaml
   - basic-auth.yaml
   - secret.yaml
+  - networkpolicy.yaml
 configMapGenerator:
   - name: anontown-config
     envs:

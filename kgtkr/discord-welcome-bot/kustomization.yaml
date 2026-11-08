@@ -2,3 +2,4 @@ namespace: discord-welcome-bot
 resources:
   - discord-welcome-bot.yaml
   - config.yaml
+  - networkpolicy.yaml

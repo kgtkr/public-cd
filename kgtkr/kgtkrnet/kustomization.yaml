@@ -2,3 +2,4 @@ namespace: kgtkrnet
 resources:
   - kgtkrnet.yaml
   - ingress.yaml
+  - networkpolicy.yaml
