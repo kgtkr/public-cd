@@ -23,6 +23,10 @@ spec:
       labels:
         app.kubernetes.io/name: redis
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: redis:5.0.14
           name: redis

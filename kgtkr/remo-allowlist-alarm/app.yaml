@@ -16,6 +16,13 @@ spec:
       labels:
         app.kubernetes.io/name: app
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       nodeSelector:
         kubernetes.kgtkr.net/node-lan: home
       tolerations:
@@ -24,6 +31,12 @@ spec:
       containers:
         - image: ghcr.io/kgtkr/remo-allowlist-alarm:20231205020757865-18c82aa
           name: app
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

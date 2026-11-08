@@ -23,6 +23,12 @@ spec:
       labels:
         app.kubernetes.io/name: redis
     spec:
+      automountServiceAccountToken: false
+      # TODO: 公式redisイメージの `docker-entrypoint.sh` が起動時に root で `/data` の `chown` と `gosu redis` を行うため、
+      # 現状は `runAsNonRoot: true` や `allowPrivilegeEscalation: false` を設定していない。`runAsUser: 999` + `fsGroup: 1000` を明示設定すれば非root起動に絞ることが可能。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: redis:5.0.14
           name: redis

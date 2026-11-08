@@ -24,9 +24,22 @@ spec:
       labels:
         app.kubernetes.io/name: server
     spec:
+      automountServiceAccountToken: false
+      # TODO: anontown-serverのDockerfileはUSER未指定(root)かつWORKDIR /home(root所有)で `npx lerna run start` を実行するため、
+      # 現状のままrunAsNonRoot: trueやreadOnlyRootFilesystem: trueを有効化するとnpx/npmのキャッシュ作成等で権限エラーになる。
+      # Nixで非rootイメージとしてビルドするか、Dockerfileでnode直接起動+非rootユーザー指定に変更すれば、
+      # runAsNonRoot: true / readOnlyRootFilesystem: true まで絞ることが可能。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: ghcr.io/kgtkr/anontown-server:20260612120724975-bdeac8a
           name: server
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

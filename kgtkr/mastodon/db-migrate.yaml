@@ -11,12 +11,24 @@ spec:
       labels:
         app.kubernetes.io/name: db-migrate
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 991
+        runAsGroup: 991
+        seccompProfile:
+          type: RuntimeDefault
       tolerations:
         - key: "kubernetes.kgtkr.net/unreliable"
           effect: "NoSchedule"
       containers:
         - image: ghcr.io/kgtkr/mastodon
           name: app
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "100m"

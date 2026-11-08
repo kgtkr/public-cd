@@ -12,13 +12,25 @@ spec:
           labels:
             app.kubernetes.io/name: rclone
         spec:
+          # TODO: initContainers（`get-secret` / `patch-secret`）で `kubectl` を実行し、Google Drive の更新された OAuth トークンを
+          # Kubernetes Secret（`rclone-current-config`）へ書き戻す設計のため、`automountServiceAccountToken: false` は設定できない。
+          # また、`bitnamilegacy/kubectl`（UID 1001）と `rclone/rclone`（デフォルト root）で同一の `emptyDir`（`/config/rclone`）上の設定ファイルを読み書きするため、
+          # 現状は Pod 全体の `runAsNonRoot: true` を設定していない。トークン管理方式の変更や実行ユーザーの統一により、さらなる権限縮小が可能。
           serviceAccountName: rclone
+          securityContext:
+            seccompProfile:
+              type: RuntimeDefault
           tolerations:
             - key: "kubernetes.kgtkr.net/unreliable"
               effect: "NoSchedule"
           initContainers:
             - image: bitnamilegacy/kubectl:1.33
               name: get-secret
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               command:
                 - /bin/sh
                 - -euc
@@ -33,6 +45,11 @@ spec:
                   name: rclone-config
             - image: rclone/rclone:1.75
               name: app
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               resources:
                 requests:
                   cpu: "10m"
@@ -51,6 +68,11 @@ spec:
                   name: rclone-config
             - image: bitnamilegacy/kubectl:1.33
               name: patch-secret
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               command:
                 - /bin/sh
                 - -euc
@@ -62,6 +84,12 @@ spec:
           containers:
             - image: alpine:3.24
               name: nop
+              securityContext:
+                readOnlyRootFilesystem: true
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               command:
                 - echo
           volumes:

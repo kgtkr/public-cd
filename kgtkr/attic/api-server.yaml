@@ -24,9 +24,22 @@ spec:
       labels:
         app.kubernetes.io/name: api-server
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: ghcr.io/zhaofengli/attic
           name: attic
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           args:
             - -f
             - /opt/attic/config.toml

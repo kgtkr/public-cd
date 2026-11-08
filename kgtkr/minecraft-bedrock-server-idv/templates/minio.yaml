@@ -49,12 +49,22 @@ spec:
       labels:
         app.kubernetes.io/name: minio-config
     spec:
+      automountServiceAccountToken: false
+      # TODO: `quay.io/minio/mc` がデフォルトで root（`/.mc`）に設定ファイルを書き込むため、現状は `runAsNonRoot: true` や `readOnlyRootFilesystem: true` を設定していない。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       tolerations:
         - key: "kubernetes.kgtkr.net/unreliable"
           effect: "NoSchedule"
       containers:
         - image: quay.io/minio/mc:RELEASE.2024-03-25T16-41-14Z
           name: app
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"
@@ -86,9 +96,19 @@ spec:
       labels:
         app.kubernetes.io/name: minio
     spec:
+      automountServiceAccountToken: false
+      # TODO: 既存PVC（`/data`）内のファイルが root 所有で作成されているため、現状は `runAsNonRoot: true` を設定していない。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: quay.io/minio/minio:RELEASE.2024-03-26T22-10-45Z
           name: minio
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

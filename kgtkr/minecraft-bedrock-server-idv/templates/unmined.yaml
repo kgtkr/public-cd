@@ -14,6 +14,12 @@ spec:
           annotations:
             kubectl.kubernetes.io/default-container: unmined
         spec:
+          automountServiceAccountToken: false
+          # TODO: `rclone/rclone` および `ghcr.io/kgtkr/unmined-docker` の Dockerfile に `USER` 指定がなく root 実行前提となっているため、
+          # 現状は `runAsNonRoot: true` を設定していない。非rootユーザーでのビルドに対応すれば `runAsNonRoot: true` の有効化が可能になる。
+          securityContext:
+            seccompProfile:
+              type: RuntimeDefault
           tolerations:
             - key: "kubernetes.kgtkr.net/unreliable"
               effect: "NoSchedule"
@@ -22,6 +28,11 @@ spec:
           initContainers:
             - image: rclone/rclone:1.75
               name: download
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               resources:
                 requests:
                   cpu: "10m"
@@ -42,6 +53,11 @@ spec:
                   name: unmined
             - name: unmined
               image: ghcr.io/kgtkr/unmined-docker:20250215043116987-9c03f91
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               command:
                 - "sh"
                 - "-ec"
@@ -66,6 +82,11 @@ spec:
                   name: unmined
             - name: upload
               image: rclone/rclone:1.75
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               command:
                 - /bin/sh
                 - -euc
@@ -81,6 +102,12 @@ spec:
           containers:
             - image: alpine:3.24
               name: nop
+              securityContext:
+                readOnlyRootFilesystem: true
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               command:
                 - echo
           volumes:

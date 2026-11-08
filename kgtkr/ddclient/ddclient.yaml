@@ -14,6 +14,13 @@ spec:
       labels:
         app.kubernetes.io/name: ddclient
     spec:
+      automountServiceAccountToken: false
+      # TODO: `linuxserver/ddclient` イメージは s6-overlay を使用しており、起動時に root での初期化・`/config` や `/run` への書き込み・`chown`/`setuid` を行い、
+      # さらに `postStart` フックで `/config/ddclient.conf` へのコピーを行っているため、現状は `runAsNonRoot: true`・`readOnlyRootFilesystem: true`・`allowPrivilegeEscalation: false` を設定できない。
+      # Nix 等でビルドした軽量な非rootイメージに移行すれば、これらの制限を有効化できる。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       nodeSelector:
         kubernetes.kgtkr.net/node-lan: home
       tolerations:

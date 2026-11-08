@@ -24,11 +24,23 @@ spec:
       labels:
         app.kubernetes.io/name: tkvs-server
     spec:
+      automountServiceAccountToken: false
+      # TODO: `tkvs-server` の Nix イメージ（`dockerTools.buildImage`）に非rootユーザーが設定されておらず、既存PVC（`/data`）のファイルが root 所有となっているため、
+      # 現状は `runAsNonRoot: true` を設定していない。`fsGroup` やマイグレーションでPVCの所有権を変更すれば非root化が可能。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       nodeSelector:
         kubernetes.io/arch: amd64
       containers:
         - image: ghcr.io/kgtkr/tkvs-server:20220814015037040-bd0adfc
           name: tkvs-server
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "100m"
