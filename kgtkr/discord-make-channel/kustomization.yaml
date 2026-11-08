@@ -1,5 +1,6 @@
 namespace: discord-make-channel
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-make-channel.yaml
   - app-secret.yaml
-  - networkpolicy.yaml

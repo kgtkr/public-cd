@@ -15,6 +15,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: discord-category-join-manager
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-https: "true"
     spec:
       automountServiceAccountToken: false
       securityContext:

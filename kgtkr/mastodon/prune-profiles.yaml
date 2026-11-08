@@ -13,6 +13,7 @@ spec:
         metadata:
           labels:
             app.kubernetes.io/name: prune-profiles
+            network.kgtkr.net/egress-dns: "true"
         spec:
           automountServiceAccountToken: false
           securityContext:

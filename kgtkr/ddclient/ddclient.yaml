@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: ddclient
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-http: "true"
+        network.kgtkr.net/egress-internet-https: "true"
     spec:
       automountServiceAccountToken: false
       # TODO: `linuxserver/ddclient` イメージは s6-overlay を使用しており、起動時に root での初期化・`/config` や `/run` への書き込み・`chown`/`setuid` を行い、

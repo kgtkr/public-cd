@@ -23,6 +23,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: server
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-https: "true"
     spec:
       automountServiceAccountToken: false
       # TODO: anontown-serverのDockerfileはUSER未指定(root)かつWORKDIR /home(root所有)で `npx lerna run start` を実行するため、

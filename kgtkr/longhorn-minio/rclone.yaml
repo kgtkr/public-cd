@@ -11,6 +11,8 @@ spec:
         metadata:
           labels:
             app.kubernetes.io/name: rclone
+            network.kgtkr.net/egress-dns: "true"
+            network.kgtkr.net/egress-internet-https: "true"
         spec:
           # TODO: initContainers（`get-secret` / `patch-secret`）で `kubectl` を実行し、Google Drive の更新された OAuth トークンを
           # Kubernetes Secret（`rclone-current-config`）へ書き戻す設計のため、`automountServiceAccountToken: false` は設定できない。

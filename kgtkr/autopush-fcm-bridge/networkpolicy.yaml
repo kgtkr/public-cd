@@ -1,16 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default-deny
-spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
-    - Egress
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: app
 spec:
   podSelector:
@@ -29,33 +19,12 @@ spec:
           port: 8080
   egress:
     - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
-    - to:
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: postgres
       ports:
         - protocol: TCP
           port: 5432
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
-              - 169.254.0.0/16
-              - 100.64.0.0/10
-      ports:
-        - protocol: TCP
-          port: 443
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -66,19 +35,8 @@ spec:
     matchLabels:
       app.kubernetes.io/name: db-migrations
   policyTypes:
-    - Ingress
     - Egress
-  ingress: []
   egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
     - to:
         - podSelector:
             matchLabels:
@@ -97,7 +55,6 @@ spec:
       app.kubernetes.io/name: postgres
   policyTypes:
     - Ingress
-    - Egress
   ingress:
     - from:
         - podSelector:
@@ -109,4 +66,3 @@ spec:
       ports:
         - protocol: TCP
           port: 5432
-  egress: []

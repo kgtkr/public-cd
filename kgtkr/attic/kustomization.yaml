@@ -1,3 +1,5 @@
+components:
+  - ../_components/networkpolicy
 resources:
   - api-server.yaml
   - attic-secret.yaml

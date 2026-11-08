@@ -1,16 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default-deny
-spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
-    - Egress
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: minio
 spec:
   podSelector:
@@ -18,7 +8,6 @@ spec:
       app.kubernetes.io/name: minio
   policyTypes:
     - Ingress
-    - Egress
   ingress:
     - from:
         - namespaceSelector:
@@ -37,7 +26,6 @@ spec:
       ports:
         - protocol: TCP
           port: 9001
-  egress: []
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -48,19 +36,8 @@ spec:
     matchLabels:
       app.kubernetes.io/name: rclone
   policyTypes:
-    - Ingress
     - Egress
-  ingress: []
   egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
     - to:
         - podSelector:
             matchLabels:
@@ -68,19 +45,6 @@ spec:
       ports:
         - protocol: TCP
           port: 9000
-    # Google Drive APIへの外部HTTPS通信
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
-              - 169.254.0.0/16
-              - 100.64.0.0/10
-      ports:
-        - protocol: TCP
-          port: 443
     # TODO: rclone.yamlのinitContainersがGoogle DriveのOAuthトークン更新をKubernetes Secret(rclone-current-config)に
     # 保存するためにkubectlを実行しており、Kubernetes APIサーバー(10.43.0.1:443 -> DNAT後コントロールプレーンノードの6443)への
     # Egressを許可せざるを得ない状態になっている。

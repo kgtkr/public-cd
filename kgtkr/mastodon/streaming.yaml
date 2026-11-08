@@ -23,6 +23,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: streaming
+        network.kgtkr.net/egress-dns: "true"
     spec:
       automountServiceAccountToken: false
       securityContext:

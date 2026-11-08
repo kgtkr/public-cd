@@ -1,5 +1,6 @@
 namespace: discord-category-join-manager-use-message-command
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-category-join-manager-use-message-command.yaml
   - config.yaml
-  - networkpolicy.yaml

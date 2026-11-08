@@ -1,8 +1,9 @@
 namespace: nature-remo-temperature-adjuster
+components:
+  - ../_components/networkpolicy
 resources:
   - app.yaml
   - app-secret.yaml
-  - networkpolicy.yaml
 configMapGenerator:
   - name: app-config
     literals:

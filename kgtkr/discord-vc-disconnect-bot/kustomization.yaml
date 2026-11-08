@@ -1,5 +1,6 @@
 namespace: discord-vc-disconnect-bot
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-vc-disconnect-bot.yaml
   - config.yaml
-  - networkpolicy.yaml

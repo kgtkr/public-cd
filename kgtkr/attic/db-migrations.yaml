@@ -10,6 +10,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: db-migrations
+        network.kgtkr.net/egress-dns: "true"
     spec:
       automountServiceAccountToken: false
       securityContext:

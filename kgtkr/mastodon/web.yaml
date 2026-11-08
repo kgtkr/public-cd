@@ -23,6 +23,10 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: web
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-http: "true"
+        network.kgtkr.net/egress-internet-https: "true"
+        network.kgtkr.net/egress-internet-smtp: "true"
     spec:
       automountServiceAccountToken: false
       securityContext:

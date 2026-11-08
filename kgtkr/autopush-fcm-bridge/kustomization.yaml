@@ -1,4 +1,6 @@
 namespace: autopush-fcm-bridge
+components:
+  - ../_components/networkpolicy
 resources:
   - postgres.yaml
   - db-migrations.yaml

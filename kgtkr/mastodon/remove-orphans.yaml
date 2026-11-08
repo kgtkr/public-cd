@@ -13,6 +13,7 @@ spec:
         metadata:
           labels:
             app.kubernetes.io/name: remove-orphans
+            network.kgtkr.net/egress-dns: "true"
         spec:
           automountServiceAccountToken: false
           securityContext:

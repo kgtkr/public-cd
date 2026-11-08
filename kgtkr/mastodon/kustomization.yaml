@@ -1,3 +1,5 @@
+components:
+  - ../_components/networkpolicy
 resources:
   - postgres.yaml
   - redis.yaml

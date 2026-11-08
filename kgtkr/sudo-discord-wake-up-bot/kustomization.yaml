@@ -1,4 +1,6 @@
 namespace: sudo-discord-wake-up-bot
+components:
+  - ../_components/networkpolicy
 resources:
   - app.yaml
   - config.yaml

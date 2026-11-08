@@ -1,5 +1,6 @@
 namespace: discord-pin-bot
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-pin-bot.yaml
   - config.yaml
-  - networkpolicy.yaml

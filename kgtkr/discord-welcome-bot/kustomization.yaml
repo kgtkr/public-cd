@@ -1,5 +1,6 @@
 namespace: discord-welcome-bot
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-welcome-bot.yaml
   - config.yaml
-  - networkpolicy.yaml

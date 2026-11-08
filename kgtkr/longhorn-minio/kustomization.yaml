@@ -1,4 +1,6 @@
 namespace: longhorn-minio
+components:
+  - ../_components/networkpolicy
 resources:
   - minio.yaml
   - rclone.yaml

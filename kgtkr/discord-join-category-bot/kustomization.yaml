@@ -1,8 +1,9 @@
 namespace: discord-join-category-bot
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-join-category-bot.yaml
   - app-secret.yaml
-  - networkpolicy.yaml
 configMapGenerator:
   - name: app-config
     literals:

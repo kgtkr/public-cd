@@ -23,6 +23,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: api-server
+        network.kgtkr.net/egress-dns: "true"
     spec:
       automountServiceAccountToken: false
       securityContext:

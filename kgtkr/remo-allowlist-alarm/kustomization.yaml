@@ -1,4 +1,6 @@
 namespace: remo-allowlist-alarm
+components:
+  - ../_components/networkpolicy
 resources:
   - app.yaml
   - app-secret.yaml

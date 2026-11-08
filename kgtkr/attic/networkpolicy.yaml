@@ -1,16 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default-deny
-spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
-    - Egress
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: api-server
 spec:
   podSelector:
@@ -28,15 +18,6 @@ spec:
         - protocol: TCP
           port: 8080
   egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
     - to:
         - podSelector:
             matchLabels:
@@ -82,19 +63,8 @@ spec:
     matchLabels:
       app.kubernetes.io/name: garbage-collector
   policyTypes:
-    - Ingress
     - Egress
-  ingress: []
   egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
     - to:
         - podSelector:
             matchLabels:
@@ -138,19 +108,8 @@ spec:
     matchLabels:
       app.kubernetes.io/name: db-migrations
   policyTypes:
-    - Ingress
     - Egress
-  ingress: []
   egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
     - to:
         - podSelector:
             matchLabels:
@@ -169,7 +128,6 @@ spec:
       app.kubernetes.io/name: postgres
   policyTypes:
     - Ingress
-    - Egress
   ingress:
     - from:
         - podSelector:
@@ -184,7 +142,6 @@ spec:
       ports:
         - protocol: TCP
           port: 5432
-  egress: []
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -196,7 +153,6 @@ spec:
       app.kubernetes.io/name: minio
   policyTypes:
     - Ingress
-    - Egress
   ingress:
     - from:
         - namespaceSelector:
@@ -220,4 +176,3 @@ spec:
       ports:
         - protocol: TCP
           port: 9001
-  egress: []
