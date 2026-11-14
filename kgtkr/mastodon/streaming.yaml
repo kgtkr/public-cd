@@ -33,7 +33,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - image: ghcr.io/kgtkr/mastodon
+        - image: ghcr.io/kgtkr/mastodon-streaming
           name: streaming
           securityContext:
             readOnlyRootFilesystem: true
@@ -47,7 +47,7 @@ spec:
               memory: "500Mi"
           args:
             - node
-            - ./streaming
+            - ./streaming/index.js
           livenessProbe:
             exec:
               command:

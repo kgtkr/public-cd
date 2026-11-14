@@ -28,3 +28,5 @@ configMapGenerator:
 images:
   - name: ghcr.io/kgtkr/mastodon
     newTag: 20260728153415426-0875e6e-mstdn.kgtkr.net
+  - name: ghcr.io/kgtkr/mastodon-streaming
+    newTag: 20261114144024924-c766a0b-kgtkr-master
