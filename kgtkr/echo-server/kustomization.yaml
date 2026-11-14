@@ -1,4 +1,7 @@
 namespace: echo-server
+components:
+  - ../_components/networkpolicy
 resources:
   - app.yaml
   - ingress.yaml
+  - networkpolicy.yaml

@@ -24,9 +24,18 @@ spec:
       labels:
         app.kubernetes.io/name: app
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: jmalloc/echo-server:v0.3.7
           name: app
+          # TODO: 現状はコンテナ内で特権ポート `PORT: "80"`（< 1024）をバインドしているため `runAsNonRoot: true` や `capabilities.drop: [ALL]` を設定していない。
+          # `PORT`（および Service の `targetPort`・NetworkPolicy）を非特権ポート（`8080` 等）に変更すれば非root化と全CapabilityのDropが可能。
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
           resources:
             requests:
               cpu: "10m"
