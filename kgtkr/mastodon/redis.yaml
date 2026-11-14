@@ -44,6 +44,8 @@ spec:
               command:
                 - redis-cli
                 - ping
+            periodSeconds: 30
+            failureThreshold: 3
           args:
             - --appendonly
             - "yes"
