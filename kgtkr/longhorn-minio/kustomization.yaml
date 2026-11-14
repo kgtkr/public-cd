@@ -1,4 +1,6 @@
 namespace: longhorn-minio
+components:
+  - ../_components/networkpolicy
 resources:
   - minio.yaml
   - rclone.yaml
@@ -7,3 +9,4 @@ resources:
   - minio-config.yaml
   - pvc.yaml
   - rclone-role.yaml
+  - networkpolicy.yaml

@@ -26,6 +26,12 @@ spec:
       labels:
         app.kubernetes.io/name: minio
     spec:
+      automountServiceAccountToken: false
+      # TODO: 既存PVC（`/data`）内のファイルが root 所有で作成されているため、現状は `runAsNonRoot: true` を設定していない。
+      # `fsGroup` やマイグレーションで権限を変更すれば非root化が可能。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       nodeSelector:
         kubernetes.io/hostname: saba
       tolerations:
@@ -34,6 +40,11 @@ spec:
       containers:
         - image: quay.io/minio/minio:RELEASE.2021-12-29T06-49-06Z
           name: minio
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

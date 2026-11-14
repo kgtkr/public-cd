@@ -27,9 +27,18 @@ spec:
       labels:
         app.kubernetes.io/name: minio
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: quay.io/minio/minio:RELEASE.2022-05-26T05-48-41Z
           name: minio
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

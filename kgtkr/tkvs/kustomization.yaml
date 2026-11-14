@@ -1,4 +1,7 @@
 namespace: tkvs
+components:
+  - ../_components/networkpolicy
 resources:
   - tkvs-server.yaml
   - tkvs-ingress.yaml
+  - networkpolicy.yaml

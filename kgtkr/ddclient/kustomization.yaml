@@ -1,4 +1,6 @@
 namespace: ddclient
+components:
+  - ../_components/networkpolicy
 resources:
   - ddclient.yaml
   - ddclient-config.yaml
