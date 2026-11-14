@@ -10,13 +10,29 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: prune-profiles
+            network.kgtkr.net/egress-dns: "true"
         spec:
+          automountServiceAccountToken: false
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 991
+            runAsGroup: 991
+            seccompProfile:
+              type: RuntimeDefault
           tolerations:
             - key: "kubernetes.kgtkr.net/unreliable"
               effect: "NoSchedule"
           containers:
             - image: ghcr.io/kgtkr/mastodon
               name: app
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
               resources:
                 requests:
                   cpu: "10m"

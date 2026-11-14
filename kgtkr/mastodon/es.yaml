@@ -27,12 +27,21 @@ spec:
       labels:
         app.kubernetes.io/name: es
     spec:
+      automountServiceAccountToken: false
       securityContext:
+        runAsNonRoot: true
         runAsUser: 1000
         fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: ghcr.io/kgtkr/elasticsearch-mastodon:20230713051640465-0fd2954
           name: es
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "30m"

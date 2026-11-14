@@ -27,6 +27,12 @@ spec:
       labels:
         app.kubernetes.io/name: postgres
     spec:
+      automountServiceAccountToken: false
+      # TODO: 公式postgresイメージの `docker-entrypoint.sh` が起動時に root で `/var/lib/postgresql/data` の `chown` と `su-exec postgres` を行うため、
+      # 現状は `runAsNonRoot: true` や `allowPrivilegeEscalation: false` を設定していない。`runAsUser: 70` + `fsGroup: 70` を明示設定すれば非root起動に絞ることが可能。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - env:
             - name: POSTGRES_PASSWORD

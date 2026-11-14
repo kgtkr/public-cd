@@ -13,13 +13,31 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: sidekiq
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-http: "true"
+        network.kgtkr.net/egress-internet-https: "true"
+        network.kgtkr.net/egress-internet-smtp: "true"
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 991
+        runAsGroup: 991
+        seccompProfile:
+          type: RuntimeDefault
       tolerations:
         - key: "kubernetes.kgtkr.net/unreliable"
           effect: "NoSchedule"
       containers:
         - image: ghcr.io/kgtkr/mastodon
           name: sidekiq
+          # TODO: Sidekiq のメディア処理等で一時ファイル書き込み（`/opt/mastodon/tmp`、`/tmp`）が発生するため、
+          # 現状は `readOnlyRootFilesystem: true` を設定していない。これらを `emptyDir` ボリュームとしてマウントすることで `readOnlyRootFilesystem: true` の有効化が可能になる。
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "200m"
