@@ -15,10 +15,24 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: discord-vc-enter-exit-bot
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-https: "true"
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: ghcr.io/kgtkr/discord-vc-enter-exit-bot:20260620100020663-ee80c56
           name: discord-vc-enter-exit-bot
+          # TODO: `lifecycle.postStart` で root 所有の `/home/app` 直下にシンボリックリンク（`/home/app/config.json`）を作成しているため、
+          # 現状は `runAsNonRoot: true` や `readOnlyRootFilesystem: true` を設定できない。
+          # 環境変数（または別ディレクトリのマウント）で設定を受け取るように変更し、Nix 等で非rootイメージをビルドすれば、`runAsNonRoot: true` および `readOnlyRootFilesystem: true` の有効化が可能になる。
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

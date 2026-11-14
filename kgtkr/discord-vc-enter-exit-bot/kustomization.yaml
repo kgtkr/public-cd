@@ -1,4 +1,6 @@
 namespace: discord-vc-enter-exit-bot
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-vc-enter-exit-bot.yaml
   - discord-vc-enter-exit-bot-config.yaml

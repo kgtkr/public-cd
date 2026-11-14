@@ -15,10 +15,25 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: discord-make-channel
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-https: "true"
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: ghcr.io/kgtkr/discord-make-channel:20221003083510781-9d8eacd
           name: discord-make-channel
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

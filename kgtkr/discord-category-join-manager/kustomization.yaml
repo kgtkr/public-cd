@@ -1,4 +1,6 @@
 namespace: discord-category-join-manager
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-category-join-manager.yaml
   - config.yaml
