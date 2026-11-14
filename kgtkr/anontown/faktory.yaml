@@ -26,9 +26,18 @@ spec:
       labels:
         app.kubernetes.io/name: faktory
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: contribsys/faktory:1.10.0
           name: faktory
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

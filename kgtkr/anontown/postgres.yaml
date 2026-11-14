@@ -23,6 +23,10 @@ spec:
       labels:
         app.kubernetes.io/name: postgres
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - env:
             - name: POSTGRES_PASSWORD

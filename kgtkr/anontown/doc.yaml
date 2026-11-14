@@ -24,9 +24,21 @@ spec:
       labels:
         app.kubernetes.io/name: doc
     spec:
+      automountServiceAccountToken: false
+      # TODO: anontown-docのDockerfileはUSER未指定(root)かつ `CMD npm start` で起動時に `/home/app/.npm` へ書き込むため、
+      # runAsNonRoot: trueやreadOnlyRootFilesystem: trueを有効化するとnpm起動時に権限エラーになる。
+      # 静的配信バイナリ直接実行またはNixイメージ化を行えば、runAsNonRoot: true / readOnlyRootFilesystem: true まで絞ることが可能。
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: ghcr.io/kgtkr/anontown-doc:20240210180820143-e390199
           name: doc
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"
