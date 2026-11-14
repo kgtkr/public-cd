@@ -52,9 +52,17 @@ spec:
       annotations:
         kubectl.kubernetes.io/default-container: nginx
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: nginx
           image: nginx:1.31.4
+          # TODO: 公式 `nginx` イメージは起動時に root で `/etc/nginx/conf.d` や `/var/cache/nginx` の初期化・特権ポート 80 のバインド・`nginx` ユーザーへの切り替えを行うため、
+          # 現状は `runAsNonRoot: true` や `capabilities.drop: [ALL]` を設定していない。`nginxinc/nginx-unprivileged`（ポート 8080）等へ移行すれば非root化が可能。
+          securityContext:
+            allowPrivilegeEscalation: false
           resources:
             requests:
               cpu: "10m"
@@ -67,6 +75,11 @@ spec:
               readOnly: true
         - name: rclone
           image: rclone/rclone:1.75
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"
