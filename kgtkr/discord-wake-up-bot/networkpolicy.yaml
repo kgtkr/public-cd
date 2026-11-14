@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: discord-wake-up-bot
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: discord-wake-up-bot
+  policyTypes:
+    - Egress
+  egress:
+    # TODO: 接続先ChromecastのIPアドレス(castHost)がSealedSecret(config.yaml)内のJSONに暗号化されており
+    # マニフェスト上から特定できないため、自宅LANサブネット(192.168.11.0/24)のGoogle Castポート(8009)を許可している。
+    # 接続先IPを固定(例: 192.168.11.10/32)して管理するようにすれば単一IP(/32)に絞ることが可能。
+    - to:
+        - ipBlock:
+            cidr: 192.168.11.0/24
+      ports:
+        - protocol: TCP
+          port: 8009

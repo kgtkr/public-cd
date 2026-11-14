@@ -15,7 +15,16 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: discord-wake-up-bot
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-https: "true"
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       nodeSelector:
         kubernetes.kgtkr.net/node-lan: home
       tolerations:
@@ -24,6 +33,12 @@ spec:
       containers:
         - image: ghcr.io/kgtkr/discord-wake-up-bot:20220516001743174-1a56e54
           name: discord-wake-up-bot
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: "10m"

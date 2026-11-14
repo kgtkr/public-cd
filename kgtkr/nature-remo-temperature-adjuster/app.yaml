@@ -11,10 +11,25 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: app
+        network.kgtkr.net/egress-dns: "true"
+        network.kgtkr.net/egress-internet-https: "true"
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - image: ghcr.io/kgtkr/nature-remo-temperature-adjuster:20220920150658421-a54e138
           name: app
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           envFrom:
             - secretRef:
                 name: app-secret

@@ -1,5 +1,8 @@
 namespace: discord-wake-up-bot
+components:
+  - ../_components/networkpolicy
 resources:
   - discord-wake-up-bot.yaml
   - config.yaml
+  - networkpolicy.yaml
 
