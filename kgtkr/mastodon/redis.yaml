@@ -39,13 +39,13 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: redis-data
-          livenessProbe:
-            exec:
-              command:
-                - redis-cli
-                - ping
-            periodSeconds: 30
-            failureThreshold: 3
+#          livenessProbe:
+#            exec:
+#              command:
+#                - redis-cli
+#                - ping
+#            periodSeconds: 30
+#            failureThreshold: 3
           args:
             - --appendonly
             - "yes"
