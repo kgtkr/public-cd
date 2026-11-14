@@ -1,4 +1,6 @@
 namespace: gcsim-mcp
+components:
+  - ../_components/networkpolicy
 resources:
   - app.yaml
   - ingress.yaml

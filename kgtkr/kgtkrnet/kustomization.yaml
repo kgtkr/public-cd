@@ -1,4 +1,7 @@
 namespace: kgtkrnet
+components:
+  - ../_components/networkpolicy
 resources:
   - kgtkrnet.yaml
   - ingress.yaml
+  - networkpolicy.yaml

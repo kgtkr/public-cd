@@ -1,4 +1,6 @@
 namespace: ghcr-webhook-router
+components:
+  - ../_components/networkpolicy
 resources:
   - app.yaml
   - ingress.yaml

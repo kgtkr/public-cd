@@ -8,9 +8,11 @@ spec:
       app.kubernetes.io/name: app
   policyTypes:
     - Ingress
-    - Egress
   ingress:
-    - ports:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
         - protocol: TCP
           port: 3485
-  egress: []

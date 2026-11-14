@@ -7,13 +7,31 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: db-migrations
+        network.kgtkr.net/egress-dns: "true"
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+        seccompProfile:
+          type: RuntimeDefault
       tolerations:
         - key: "kubernetes.kgtkr.net/unreliable"
           effect: "NoSchedule"
       containers:
         - image: ghcr.io/kgtkr/autopush-fcm-bridge:20261030133320883-4941313-master
           name: db-migrations
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           args:
             - migrate
           env:
