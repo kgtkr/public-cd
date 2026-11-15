@@ -30,7 +30,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - image: redis:6-alpine
+        - image: redis:8.10.3-alpine
           name: redis
           resources:
             requests:
