@@ -166,7 +166,7 @@ spec:
         type = s3
         provider = Minio
         env_auth = false
-        access_key_id = {{ index . "MINIO_ROOT_USER" }}
-        secret_access_key = {{ index . "MINIO_ROOT_PASSWORD" }}
+        access_key_id = {{ `{{ index . "MINIO_ROOT_USER" }}` }}
+        secret_access_key = {{ `{{ index . "MINIO_ROOT_PASSWORD" }}` }}
         region = us-east-1
         endpoint = http://minio:9000
