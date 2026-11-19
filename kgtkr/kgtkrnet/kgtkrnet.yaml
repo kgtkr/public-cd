@@ -31,7 +31,7 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - image: ghcr.io/kgtkr/kgtkr.net:20261113090633853-5a0453c
+        - image: ghcr.io/kgtkr/kgtkr.net:20261119083508047-e84ccb6
           name: kgtkrnet
           securityContext:
             readOnlyRootFilesystem: true
